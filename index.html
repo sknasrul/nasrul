@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <title>Sk Nasrul</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+        body{
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #fdeff7, #e0f7ff);
+            user-select: none;
+        }
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, .7);
+            padding: .5rem;
+            border-radius: 1rem;
+            svg{cursor:pointer;transition: .3s;}
+            svg:active{height: 30px;}
+            img{height:35px;border-radius:50%;}
+            img:active{opacity:.5;}
+            b{font-size: 1.3rem;}
+        }
+        .box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            img{
+                width: 9rem;
+                border-radius: 50%;
+            }
+        }
+        .texts{
+            margin-top: 2rem;
+            text-align: center;
+            font-size: clamp(1.5rem, 7vw, 2rem);
+        }
+        #intro{
+            font-size: clamp(1.5rem, 7vw, 2rem);
+            display: inline-block;
+            color: #4070F4;
+            text-shadow: 1.5rem 1rem .5rem rgba(62, 111, 244, .1);
+            font-weight: 600;
+            border-right: 1px solid black;
+            animation: b 1s step-start infinite;
+        }
+        @keyframes b {
+        50% {
+            border-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <svg width="35" viewBox="0 0 24 24"><path d="M3 8a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m0 8a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1"></path></svg>
+        <b>Sk Nasrul</b>
+        <a href="new.html"><svg id="profile" viewBox="0 0 24 24" width="35"><circle cx="12" cy="8" r="4" /><path d="M12 14c-4 0-7 3-7 7h14c0-4-3-7-7-7z" /></svg></a>
+    </header>
+    <div class="box">
+        <img src="photo.jpg">
+        <div class="texts"><div id="intro"></div></div>
+    </div>
+    <script>
+const t = document.getElementById('intro');
+const l = ['Sk Nasrul','Sk Nasrul Islam'];
+const ts = 100;
+const es = 50;
+const pb = 1000;
+
+let c = 0;
+let i = true;
+let ti = 0;
+let int;
+
+function type() {
+    const ct = l[c];
+    
+    if (i) {
+        t.textContent += ct[ti];
+        ti++;
+        if (ti === ct.length) {
+            i = false;
+            setTimeout(() => {
+                clearInterval(int);
+                int = setInterval(erase, es);
+            }, pb);
+        }
+    }
+}
+
+function erase() {
+    if (!i) {
+        t.textContent = t.textContent.slice(0, -1);
+        if (t.textContent === '') {
+            clearInterval(int);
+            c = (c + 1) % l.length;
+            ti = 0;
+            i = true;
+            setTimeout(() => {
+                int = setInterval(type, ts);
+            }, pb);
+        }
+    }
+}
+
+int = setInterval(type, ts);
+
+    </script>
+</body>
+</html>
